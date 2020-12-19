@@ -12,8 +12,9 @@ const Index = ({ data }) => (
   <Layout>
     <Box>
       <Title as="h2" size="large">
-        {data.homeJson.content.childMarkdownRemark.rawMarkdownBody}
+        {data.homeJson.content}
       </Title>
+      <Title as="h3">{data.homeJson.subtitle}</Title>
       <Modal>
         <video
           src="https://i.imgur.com/gzFqNSW.mp4"
@@ -40,12 +41,8 @@ export const query = graphql`
   query HomepageQuery {
     homeJson {
       title
-      content {
-        childMarkdownRemark {
-          html
-          rawMarkdownBody
-        }
-      }
+      content
+      subtitle
       gallery {
         title
         copy

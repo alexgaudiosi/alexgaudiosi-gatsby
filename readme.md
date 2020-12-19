@@ -112,17 +112,16 @@ Find the site-wide configuration in `site-config.js`.
 
 ```js
 module.exports = {
-  siteTitle: `Gatsby Universal`,
-  siteTitleShort: `GatsbyU`,
-  siteDescription: `An opinionated starter for Gatsby.`,
-  siteUrl: `https://gu.fabianschultz.com`,
+  siteTitle: `Alex Gaudiosi`,
+  siteTitleShort: `AlexGaudiosi`,
+  siteDescription: `London based FrontEnd UX Engineer.`,
+  siteUrl: `https://alexgaudiosi.com`,
   themeColor: `#000`,
   backgroundColor: `#fff`,
   pathPrefix: null,
   logo: path.resolve(__dirname, 'src/images/icon.png'),
   social: {
-    twitter: `gatsbyjs`,
-    fbAppId: `966242223397117`,
+    twitter: `alexgaudiosi`,
   },
 };
 ```

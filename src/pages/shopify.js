@@ -4,6 +4,7 @@ import { graphql } from 'gatsby';
 import Layout from 'components/layout';
 import Box from 'components/box';
 import Head from 'components/head';
+import Gallery from 'components/gallery';
 
 const Shopify = ({ data }) => (
   <Layout>
@@ -14,6 +15,7 @@ const Shopify = ({ data }) => (
           __html: data.shopifyJson.content.childMarkdownRemark.html,
         }}
       />
+      <Gallery items={data.shopifyJson.gallery} />
     </Box>
   </Layout>
 );
@@ -31,6 +33,17 @@ export const query = graphql`
       content {
         childMarkdownRemark {
           html
+        }
+      }
+      gallery {
+        title
+        copy
+        image {
+          childImageSharp {
+            fluid(maxHeight: 500, quality: 90) {
+              ...GatsbyImageSharpFluid_withWebp
+            }
+          }
         }
       }
     }

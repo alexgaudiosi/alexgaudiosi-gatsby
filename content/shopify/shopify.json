@@ -1,4 +1,19 @@
 {
   "title": "Shopify",
-  "content": "content.md"
+  "content": "content.md",
+  "gallery": [{
+    "title": "House of Roxy London",
+    "copy": "Boutique jewellery",
+    "image": "../images/gallery/house-of-roxy.jpg"
+  },
+  {
+    "title": "Simple Foods",
+    "copy": "Meal delivery service",
+    "image": "../images/gallery/simple-foods.jpg"
+  },
+  {
+    "title": "Rosslyn Coffee",
+    "copy": "Award winning coffee delivery",
+    "image": "../images/gallery/rosslyn-coffee.jpg"
+  }]
 }

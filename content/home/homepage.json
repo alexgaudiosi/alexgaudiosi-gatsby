@@ -1,6 +1,7 @@
 {
   "title": "Home",
-  "content": "intro.md",
+  "content": "London based FrontEnd UX Engineer.",
+  "subtitle": "I specialise in delivering the best experiences for users - from cutting edge financial systems, to visually immersive e-commerce stores.",
   "gallery": [{
     "title": "React Context",
     "copy": "For global styles.",
