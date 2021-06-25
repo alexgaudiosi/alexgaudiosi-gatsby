@@ -3,9 +3,10 @@
   "content": "London based FrontEnd UX Engineer.",
   "subtitle": "I specialise in delivering the best experiences for users - from cutting edge financial systems, to visually immersive e-commerce stores.",
   "gallery": [{
-    "title": "React Context",
+    "title": "Shopify Stores",
     "copy": "For global styles.",
-    "image": "../images/gallery/react-context.jpg"
+    "image": "../images/gallery/react-context.jpg",
+    "url": "/shopify/"
   },
   {
     "title": "Page Transitions",
