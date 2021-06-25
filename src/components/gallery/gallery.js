@@ -5,14 +5,12 @@ import { Container } from './gallery.css';
 
 const Gallery = ({ items }) => (
   <Container>
-    {items.map((item, i) => (
-      <Item {...item} key={i} />
-    ))}
+    {items && items.map((item, i) => <Item {...item} key={i} />)}
   </Container>
 );
 
 Gallery.propTypes = {
-  items: PropTypes.arrayOf(PropTypes.object).isRequired,
+  items: PropTypes.arrayOf(PropTypes.object),
 };
 
 export default Gallery;

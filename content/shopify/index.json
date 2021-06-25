@@ -4,7 +4,8 @@
   "gallery": [{
     "title": "House of Roxy London",
     "copy": "Boutique jewellery",
-    "image": "../images/gallery/house-of-roxy.jpg"
+    "image": "../images/gallery/house-of-roxy.jpg",
+    "url": "/shopify/test/"
   },
   {
     "title": "Simple Foods",
