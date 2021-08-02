@@ -46,6 +46,8 @@ export const query = graphql`
           }
         }
         url
+        target
+        rel
       }
     }
   }
