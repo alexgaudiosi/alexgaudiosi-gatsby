@@ -1,21 +1,11 @@
 {
   "title": "Home",
   "content": "London based FrontEnd UX Engineer.",
-  "subtitle": "I specialise in delivering the best experiences for users - from cutting edge financial systems, to visually immersive e-commerce stores.",
+  "subtitle": "Specialising in delivering the best experiences for users - from cutting edge financial systems, to visually immersive e-commerce stores.",
   "gallery": [{
     "title": "Shopify Stores",
     "copy": "For global styles.",
-    "image": "../images/gallery/react-context.jpg",
+    "image": "../images/gallery/shopify-store.jpg",
     "url": "/shopify/"
-  },
-  {
-    "title": "Page Transitions",
-    "copy": "Component-based for easy usage.",
-    "image": "../images/gallery/page-transitions.jpg"
-  },
-  {
-    "title": "Intersection Observer",
-    "copy": "Including a polyfill for Safari.",
-    "image": "../images/gallery/intersection-observer.jpg"
   }]
 }

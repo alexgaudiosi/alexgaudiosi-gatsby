@@ -23,7 +23,7 @@ const AnimatedContainer = posed.div({
 });
 
 const Header = ({ title }) => (
-  <AnimatedContainer>
+  <AnimatedContainer style={{ maxWidth: '1100px', margin: 'auto' }}>
     <Container>
       <Link to="/">
         <Title as="h1">{title}</Title>
