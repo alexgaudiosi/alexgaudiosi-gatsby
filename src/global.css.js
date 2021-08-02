@@ -34,7 +34,7 @@ export default createGlobalStyle`
   }
 
   body {
-    font-family: -apple-system,BlinkMacSystemFont,"Segoe UI",Helvetica,Arial,sans-serif,"Apple Color Emoji","Segoe UI Emoji","Segoe UI Symbol";
+    font-family: 'Forum', cursive;
     line-height: 1;
     font-size: 1.6rem;
     color: #000;
@@ -60,6 +60,10 @@ export default createGlobalStyle`
   q:before, q:after {
     content: '';
     content: none;
+  }
+
+  h1, h2, h3, h4, h5, h6 {
+    font-family: 'EB Garamond', serif;
   }
 
   table {
