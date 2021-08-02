@@ -4,13 +4,19 @@ import Layout from 'components/layout';
 import Box from 'components/box';
 import Title from 'components/title';
 import Gallery from 'components/gallery';
+import styled from 'styled-components';
 // import IOExample from 'components/io-example';
 // import Modal from 'containers/modal';
 import { graphql } from 'gatsby';
 
+const Container = styled.div`
+  max-width: 1100px;
+  margin: auto;
+`;
+
 const Index = ({ data }) => (
   <Layout>
-    <div style={{ maxWidth: '1100px', margin: 'auto' }}>
+    <Container>
       <Box>
         <Title as="h2" size="large">
           {data.homeJson.content}
@@ -25,11 +31,11 @@ const Index = ({ data }) => (
             muted
           />
         </Modal> */}
+        <Gallery items={data.homeJson.gallery} />
       </Box>
-      <Gallery items={data.homeJson.gallery} />
       {/* <div style={{ height: '50vh' }} /> */}
       {/* <IOExample /> */}
-    </div>
+    </Container>
   </Layout>
 );
 
