@@ -10,24 +10,26 @@ import { graphql } from 'gatsby';
 
 const Index = ({ data }) => (
   <Layout>
-    <Box>
-      <Title as="h2" size="large">
-        {data.homeJson.content}
-      </Title>
-      <Title as="h3">{data.homeJson.subtitle}</Title>
-      {/* <Modal>
-        <video
-          src="https://i.imgur.com/gzFqNSW.mp4"
-          playsInline
-          loop
-          autoPlay
-          muted
-        />
-      </Modal> */}
-    </Box>
-    <Gallery items={data.homeJson.gallery} />
-    <div style={{ height: '50vh' }} />
-    {/* <IOExample /> */}
+    <div style={{ maxWidth: '1100px', margin: 'auto' }}>
+      <Box>
+        <Title as="h2" size="large">
+          {data.homeJson.content}
+        </Title>
+        <Title as="h3">{data.homeJson.subtitle}</Title>
+        {/* <Modal>
+          <video
+            src="https://i.imgur.com/gzFqNSW.mp4"
+            playsInline
+            loop
+            autoPlay
+            muted
+          />
+        </Modal> */}
+      </Box>
+      <Gallery items={data.homeJson.gallery} />
+      {/* <div style={{ height: '50vh' }} /> */}
+      {/* <IOExample /> */}
+    </div>
   </Layout>
 );
 
