@@ -13,7 +13,7 @@ if (!fs.existsSync(dir)) {
   fs.mkdirSync(dir);
 }
 
-const source = 'src/images/icon.png';
+const source = 'src/images/poro-logo.png';
 const configuration = {
   path: '/icons/',
   appName: siteTitleShort,
