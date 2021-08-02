@@ -5,8 +5,7 @@ import { Title, Copy } from './item.css';
 
 const Item = ({ title, copy, image, url }) => (
   <figure>
-    {console.log(url)}
-    <a href={url}>
+    <a href={url} target="_blank" rel="noopener noreferrer">
       <Img fluid={image ? image.childImageSharp.fluid : {}} alt={title} />
       <figcaption>
         <Title>{title}</Title>
