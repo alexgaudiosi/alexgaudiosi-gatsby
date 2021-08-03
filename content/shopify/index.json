@@ -5,6 +5,14 @@
     "title": "House of Roxy London",
     "copy": "Boutique jewellery",
     "image": "../images/gallery/house-of-roxy.jpg",
+    "url": "https://finisterre.com/",
+    "target": "_blank",
+    "rel": "noopener noreferrer"
+  },
+  {
+    "title": "House of Roxy London",
+    "copy": "Boutique jewellery",
+    "image": "../images/gallery/house-of-roxy.jpg",
     "url": "https://houseofroxylondon.com/",
     "target": "_blank",
     "rel": "noopener noreferrer"
@@ -21,7 +29,7 @@
     "title": "Rosslyn Coffee",
     "copy": "Award winning coffee delivery",
     "image": "../images/gallery/rosslyn-coffee.jpg",
-    "url": "/",
+    "url": "https://rosslyncoffee.com/",
     "target": "_blank",
     "rel": "noopener noreferrer"
   },
@@ -29,7 +37,7 @@
     "title": "Thatch & Stone",
     "copy": "Homeware",
     "image": "../images/gallery/thatch-and-stone.jpg",
-    "url": "https://www.thatchandstone.co.uk/",
+    "url": "https://thatchandstone.co.uk/",
     "target": "_blank",
     "rel": "noopener noreferrer"
   }]

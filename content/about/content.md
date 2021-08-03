@@ -1,21 +1,10 @@
-Find the repository [on GitHub](https://github.com/fabe/gatsby-universal).
 
-```
-# Installation
-gatsby new my-site https://github.com/fabe/gatsby-universal
+Find me:
 
-# To develop
-yarn develop
+[on GitHub](https://github.com/alexgaudiosi)
 
-# To build
-yarn build
+[on LinkedIn](https://www.linkedin.com/in/alexgaudiosi)
 
-# To test SSR (for Lighthouse etc.)
-yarn ssr
+[by Email](mailto:me@alexgaudiosi.com)
 
-# To format JS (precommit)
-yarn format
 
-# To generate favicons (included in `build`)
-yarn build:favicons
-```
