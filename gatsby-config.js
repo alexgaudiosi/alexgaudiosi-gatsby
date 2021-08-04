@@ -8,7 +8,14 @@ module.exports = {
     'gatsby-plugin-sharp',
     'gatsby-transformer-sharp',
     {
-      resolve: 'gatsby-transformer-remark'
+      resolve: 'gatsby-transformer-remark',
+    },
+    {
+      resolve: 'gatsby-source-filesystem',
+      options: {
+        name: 'images',
+        path: `${__dirname}/src/images`,
+      },
     },
     'gatsby-plugin-react-helmet',
     'gatsby-plugin-sitemap',

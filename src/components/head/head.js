@@ -155,6 +155,20 @@ const Head = ({
       rel="stylesheet"
     />
 
+    <script
+      async
+      src="https://www.googletagmanager.com/gtag/js?id=G-5B3D8NHYWC"
+    ></script>
+    <script>
+      {`
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+
+        gtag('config', 'G-5B3D8NHYWC');
+      `}
+    </script>
+
     <script type="application/ld+json">
       {JSON.stringify(
         schemaGenerator({
