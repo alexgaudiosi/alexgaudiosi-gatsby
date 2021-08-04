@@ -2,17 +2,17 @@
   "title": "Shopify",
   "content": "content.md",
   "gallery": [{
-    "title": "Penguin",
+    "title": "Penguin Books",
     "copy": "Boutique jewellery",
-    "image": "../images/gallery/house-of-roxy.jpg",
-    "url": "https://finisterre.com/",
+    "image": "../images/gallery/penguin-books.jpg",
+    "url": "https://shop.penguin.co.uk/",
     "target": "_blank",
     "rel": "noopener noreferrer"
   },
   {
     "title": "Finisterre",
     "copy": "Boutique jewellery",
-    "image": "../images/gallery/house-of-roxy.jpg",
+    "image": "../images/gallery/finisterre.jpg",
     "url": "https://finisterre.com/",
     "target": "_blank",
     "rel": "noopener noreferrer"
@@ -20,16 +20,16 @@
   {
     "title": "Bluebella",
     "copy": "Boutique jewellery",
-    "image": "../images/gallery/house-of-roxy.jpg",
-    "url": "https://finisterre.com/",
+    "image": "../images/gallery/bluebella.jpg",
+    "url": "https://www.bluebella.com/",
     "target": "_blank",
     "rel": "noopener noreferrer"
   },
   {
     "title": "Hummingbird Bakery",
     "copy": "Boutique jewellery",
-    "image": "../images/gallery/house-of-roxy.jpg",
-    "url": "https://finisterre.com/",
+    "image": "../images/gallery/hummingbird-bakery.jpg",
+    "url": "https://hummingbirdbakery.com/",
     "target": "_blank",
     "rel": "noopener noreferrer"
   },
