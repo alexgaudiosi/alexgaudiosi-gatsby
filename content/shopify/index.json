@@ -2,7 +2,31 @@
   "title": "Shopify",
   "content": "content.md",
   "gallery": [{
-    "title": "House of Roxy London",
+    "title": "Penguin",
+    "copy": "Boutique jewellery",
+    "image": "../images/gallery/house-of-roxy.jpg",
+    "url": "https://finisterre.com/",
+    "target": "_blank",
+    "rel": "noopener noreferrer"
+  },
+  {
+    "title": "Finisterre",
+    "copy": "Boutique jewellery",
+    "image": "../images/gallery/house-of-roxy.jpg",
+    "url": "https://finisterre.com/",
+    "target": "_blank",
+    "rel": "noopener noreferrer"
+  },
+  {
+    "title": "Bluebella",
+    "copy": "Boutique jewellery",
+    "image": "../images/gallery/house-of-roxy.jpg",
+    "url": "https://finisterre.com/",
+    "target": "_blank",
+    "rel": "noopener noreferrer"
+  },
+  {
+    "title": "Hummingbird Bakery",
     "copy": "Boutique jewellery",
     "image": "../images/gallery/house-of-roxy.jpg",
     "url": "https://finisterre.com/",

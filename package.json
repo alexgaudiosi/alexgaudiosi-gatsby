@@ -1,15 +1,15 @@
 {
-  "name": "gatsby-universal",
+  "name": "alexgaudiosi.com",
   "license": "MIT",
-  "author": "Fabian Schultz <desk@fabianschultz.com>",
+  "author": "Alex Gaudiosi",
   "scripts": {
     "develop": "gatsby develop",
     "serve": "gatsby serve",
-    "ssr": "npm run build && npm run serve",
+    "ssr": "yarn run build && yarn run serve",
     "format": "prettier --config ./.prettierrc --write src/**/*.js",
     "build:dir": "mkdirp ./public/icons/",
     "build:favicons": "node scripts/favicons",
-    "build": "npm run build:dir && npm run build:favicons && gatsby build",
+    "build": "yarn run build:dir && yarn run build:favicons && gatsby build",
     "test": "ava **/*.test.js --verbose"
   },
   "greenkeeper": {
