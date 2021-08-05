@@ -30,6 +30,18 @@ module.exports = {
         path: `${__dirname}/content`,
       },
     },
+    {
+      resolve: 'gatsby-plugin-robots-txt',
+      options: {
+        host: 'https://www.alexgaudiosi.com',
+        sitemap: 'https://www.alexgaudiosi.com/sitemap.xml',
+        env: {
+          production: {
+            policy: [{ userAgent: '*', allow: '/' }],
+          },
+        },
+      },
+    },
     'gatsby-plugin-webpack-size',
     {
       resolve: 'gatsby-plugin-react-svg',
