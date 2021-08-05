@@ -1,4 +1,5 @@
 import styled from 'styled-components';
+import { accent } from 'constants/theme';
 
 export const Container = styled.header`
   display: flex;
@@ -9,7 +10,7 @@ export const Container = styled.header`
   a {
     color: #757575;
     transition: color 0.2s ease;
-    text-decoration: none;
+    text-decoration: underline ${accent};
 
     &:hover {
       color: inherit;

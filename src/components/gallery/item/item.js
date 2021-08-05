@@ -9,12 +9,15 @@ const Item = ({ title, copy, image, url, target, rel }) => (
       <GatsbyImage
         image={image ? image.childImageSharp.gatsbyImageData : {}}
         alt={title}
+        style={{ border: '1px solid' }}
       />
       <figcaption>
-        <Title>{title}</Title>
-        <Copy>{copy}</Copy>
+        <Title>
+          <h4>{title}</h4>
+        </Title>
       </figcaption>
     </a>
+    <Copy>{copy}</Copy>
   </figure>
 );
 
