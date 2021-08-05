@@ -11,10 +11,12 @@ const Item = ({ title, copy, image, url, target, rel }) => (
         alt={title}
       />
       <figcaption>
-        <Title>{title}</Title>
-        <Copy>{copy}</Copy>
+        <Title>
+          <h4>{title}</h4>
+        </Title>
       </figcaption>
     </a>
+    <Copy>{copy}</Copy>
   </figure>
 );
 

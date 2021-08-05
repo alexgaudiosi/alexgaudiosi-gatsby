@@ -72,7 +72,8 @@ export default createGlobalStyle`
   }
 
   a {
-    color: ${accent};
+    color: inherit;
+    text-decoration: underline ${accent};
   }
 
   pre {
