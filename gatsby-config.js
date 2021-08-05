@@ -5,6 +5,7 @@ module.exports = {
     ...siteConfig,
   },
   plugins: [
+    'gatsby-plugin-image',
     'gatsby-plugin-sharp',
     'gatsby-transformer-sharp',
     {
@@ -14,7 +15,7 @@ module.exports = {
       resolve: 'gatsby-source-filesystem',
       options: {
         name: 'images',
-        path: `${__dirname}/src/images`,
+        path: `${__dirname}/content/images`,
       },
     },
     'gatsby-plugin-react-helmet',
@@ -27,6 +28,18 @@ module.exports = {
       options: {
         name: 'content',
         path: `${__dirname}/content`,
+      },
+    },
+    {
+      resolve: 'gatsby-plugin-robots-txt',
+      options: {
+        host: 'https://www.alexgaudiosi.com',
+        sitemap: 'https://www.alexgaudiosi.com/sitemap.xml',
+        env: {
+          production: {
+            policy: [{ userAgent: '*', allow: '/' }],
+          },
+        },
       },
     },
     'gatsby-plugin-webpack-size',

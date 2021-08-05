@@ -56,9 +56,7 @@ export const query = graphql`
         copy
         image {
           childImageSharp {
-            fluid(maxHeight: 500, quality: 90) {
-              ...GatsbyImageSharpFluid_withWebp
-            }
+            gatsbyImageData(height: 500, quality: 90, layout: FULL_WIDTH)
           }
         }
         url
