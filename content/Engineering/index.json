@@ -1,0 +1,68 @@
+{
+  "title": "Engineering",
+  "content": "content.md",
+  "gallery": [{
+    "title": "Penguin Books",
+    "copy": "World renowned publisher store",
+    "image": "../images/gallery/penguin-books.jpg",
+    "url": "https://shop.penguin.co.uk/",
+    "target": "_blank",
+    "rel": "noopener noreferrer"
+  },
+  {
+    "title": "Finisterre",
+    "copy": "High end trekking and outdoor store",
+    "image": "../images/gallery/finisterre.jpg",
+    "url": "https://finisterre.com/",
+    "target": "_blank",
+    "rel": "noopener noreferrer"
+  },
+  {
+    "title": "Bluebella",
+    "copy": "Lingerie store built on Shopify Plus",
+    "image": "../images/gallery/bluebella.jpg",
+    "url": "https://www.bluebella.com/",
+    "target": "_blank",
+    "rel": "noopener noreferrer"
+  },
+  {
+    "title": "Hummingbird Bakery",
+    "copy": "Acclaimed bakery with custom cake building application",
+    "image": "../images/gallery/hummingbird-bakery.jpg",
+    "url": "https://hummingbirdbakery.com/",
+    "target": "_blank",
+    "rel": "noopener noreferrer"
+  },
+  {
+    "title": "House of Roxy London",
+    "copy": "Boutique jewellery",
+    "image": "../images/gallery/house-of-roxy.jpg",
+    "url": "https://houseofroxylondon.com/",
+    "target": "_blank",
+    "rel": "noopener noreferrer"
+  },
+  {
+    "title": "Simple Foods",
+    "copy": "On-demand healthy meal delivery service",
+    "image": "../images/gallery/simple-foods.jpg",
+    "url": "https://eatsimplefoods.co.uk/",
+    "target": "_blank",
+    "rel": "noopener noreferrer"
+  },
+  {
+    "title": "Rosslyn Coffee",
+    "copy": "Award winning coffee delivery",
+    "image": "../images/gallery/rosslyn-coffee.jpg",
+    "url": "https://rosslyncoffee.com/",
+    "target": "_blank",
+    "rel": "noopener noreferrer"
+  },
+  {
+    "title": "Thatch & Stone",
+    "copy": "Handmade homeware",
+    "image": "../images/gallery/thatch-and-stone.jpg",
+    "url": "https://thatchandstone.co.uk/",
+    "target": "_blank",
+    "rel": "noopener noreferrer"
+  }]
+}
