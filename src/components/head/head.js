@@ -40,6 +40,8 @@ const Head = ({
       content="black-translucent"
       name="apple-mobile-web-app-status-bar-style"
     />
+
+    <meta name="robots" content="all" />
     <meta content={themeColor} name="theme-color" />
     <meta content={siteTitle} name="application-name" />
 
