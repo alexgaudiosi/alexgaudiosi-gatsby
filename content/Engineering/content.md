@@ -1,2 +1,1 @@
-Tailor made, high performing Shopify stores, designed for conversion.
-
+User experiences built for speed, high traffic and scalability.
