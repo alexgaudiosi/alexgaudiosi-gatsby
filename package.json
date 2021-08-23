@@ -9,6 +9,7 @@
     "format": "prettier --config ./.prettierrc --write src/**/*.js",
     "build:dir": "mkdirp ./public/icons/",
     "build:favicons": "node scripts/favicons",
+    "postinstall": "yarn run build:dir && yarn run build:favicons",
     "build": "yarn run build:favicons && yarn run build:dir && gatsby build",
     "test": "ava **/*.test.js --verbose"
   },
