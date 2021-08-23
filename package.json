@@ -11,7 +11,7 @@
     "build:favicons": "node scripts/favicons",
     "build": "yarn run build:favicons && yarn run build:dir && gatsby build",
     "test": "ava **/*.test.js --verbose",
-    "postinstall": "yarn run build:favicons"
+    "postinstall": "yarn run build:dir && yarn run build:favicons"
   },
   "greenkeeper": {
     "ignore": [
