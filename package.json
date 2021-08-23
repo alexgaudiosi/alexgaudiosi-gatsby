@@ -5,11 +5,11 @@
   "scripts": {
     "develop": "gatsby develop",
     "serve": "gatsby serve",
-    "ssr": "yarn run build && yarn run serve",
+    "ssr": "yarn run build:favicons && yarn run build && yarn run serve",
     "format": "prettier --config ./.prettierrc --write src/**/*.js",
     "build:dir": "mkdirp ./public/icons/",
     "build:favicons": "node scripts/favicons",
-    "build": "yarn run build:dir && yarn run build:favicons && gatsby build",
+    "build": "yarn run build:favicons && yarn run build:dir && gatsby build",
     "test": "ava **/*.test.js --verbose"
   },
   "greenkeeper": {
