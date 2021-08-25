@@ -7,6 +7,5 @@ import wrapPageElementWithTransition from 'helpers/wrapPageElement';
 export const wrapRootElement = ({ element }) => {
   return <AppProvider>{element}</AppProvider>;
 };
-
 // Page Transitions
 export const wrapPageElement = wrapPageElementWithTransition;
