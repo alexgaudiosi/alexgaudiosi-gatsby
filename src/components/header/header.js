@@ -1,36 +1,33 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import styled from 'styled-components';
 import { Link } from 'gatsby';
-import posed from 'react-pose';
+import MEDIA from 'helpers/mediaTemplates';
 import { Container } from './header.css';
 import Title from 'components/title';
 import Nav from 'components/header/nav';
 
-// Example of a component-specific page transition
-const AnimatedContainer = posed.div({
-  enter: {
-    y: 0,
-    transition: {
-      ease: 'easeInOut',
-    },
-  },
-  exit: {
-    y: '-100%',
-    transition: {
-      ease: 'easeInOut',
-    },
-  },
-});
+const HeaderLogo = styled.img`
+  width: 40px;
+  height: 40px;
+  padding-right: 10px;
+
+  ${MEDIA.TABLET`
+    width: 30px;
+    height: 30px;
+  `};
+`;
 
 const Header = ({ title }) => (
-  <AnimatedContainer style={{ maxWidth: '1100px', margin: 'auto' }}>
+  <div style={{ maxWidth: '1100px', margin: 'auto' }}>
     <Container>
-      <Link to="/">
+      <Link to="/" style={{ display: 'flex', alignItems: 'center' }}>
+        <HeaderLogo src="./poro.svg" alt="" />
         <Title as="h1">{title}</Title>
       </Link>
       <Nav />
     </Container>
-  </AnimatedContainer>
+  </div>
 );
 
 Header.propTypes = {

@@ -2,10 +2,10 @@ const path = require('path');
 const DirectoryNamedWebpackPlugin = require('directory-named-webpack-plugin');
 
 exports.onCreateWebpackConfig = ({
-  stage,
-  getConfig,
-  rules,
-  loaders,
+  // stage,
+  // getConfig,
+  // rules,
+  // loaders,
   actions,
 }) => {
   actions.setWebpackConfig({

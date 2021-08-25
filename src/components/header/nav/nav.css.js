@@ -5,14 +5,13 @@ export const Container = styled.nav`
     display: flex;
     list-style: none;
     padding: 0;
+    flex-wrap: wrap;
+    justify-content: space-around;
 
     li {
       text-transform: uppercase;
       font-size: 1.3rem;
-
-      & + li {
-        margin-left: 2rem;
-      }
+      margin: 0.5rem 1rem;
     }
   }
 `;
