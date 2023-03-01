@@ -5,13 +5,15 @@ import Box from 'components/box';
 import Title from 'components/title';
 import Gallery from 'components/gallery';
 import styled from 'styled-components';
-// import IOExample from 'components/io-example';
-// import Modal from 'containers/modal';
 import { graphql } from 'gatsby';
 
 const Container = styled.div`
   max-width: 1100px;
   margin: auto;
+
+  h3 {
+    margin-bottom: 20x;
+  }
 `;
 
 const Index = ({ data }) => (
@@ -22,19 +24,8 @@ const Index = ({ data }) => (
           {data.homeJson.content}
         </Title>
         <Title as="h3">{data.homeJson.subtitle}</Title>
-        {/* <Modal>
-          <video
-            src="https://i.imgur.com/gzFqNSW.mp4"
-            playsInline
-            loop
-            autoPlay
-            muted
-          />
-        </Modal> */}
         <Gallery items={data.homeJson.gallery} />
       </Box>
-      {/* <div style={{ height: '50vh' }} /> */}
-      {/* <IOExample /> */}
     </Container>
   </Layout>
 );
