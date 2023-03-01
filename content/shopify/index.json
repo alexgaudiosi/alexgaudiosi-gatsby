@@ -2,6 +2,14 @@
   "title": "Shopify",
   "content": "content.md",
   "gallery": [{
+    "title": "WIT Fitness",
+    "copy": "Elite athlete training gyms and apparel",
+    "image": "../images/gallery/wit-fitness.jpg",
+    "url": "https://wit-fitness.com/",
+    "target": "_blank",
+    "rel": "noopener noreferrer"
+  },
+  {
     "title": "Penguin Books",
     "copy": "World renowned publisher store",
     "image": "../images/gallery/penguin-books.jpg",
