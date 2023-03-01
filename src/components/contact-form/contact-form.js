@@ -29,6 +29,7 @@ const Button = styled.button`
   border: 1px solid;
   border-radius: 0;
   cursor: pointer;
+  font: inherit;
 `;
 
 const Select = styled.select`
