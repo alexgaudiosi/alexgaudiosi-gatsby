@@ -4,42 +4,37 @@ import { graphql } from 'gatsby';
 import Layout from 'components/layout';
 import Box from 'components/box';
 import Head from 'components/head';
-import Title from 'components/title';
 import styled from 'styled-components';
-import ContactForm from 'components/contact-form';
 
 const Container = styled.div`
   max-width: 1100px;
   margin: auto;
 `;
 
-const About = ({ data }) => (
+const ThankYou = ({ data }) => (
   <Layout>
     <Container>
-      <Head pageTitle={data.aboutJson.title} />
+      <Head pageTitle={data.thankYouJson.title} />
       <Box>
         <div
           dangerouslySetInnerHTML={{
-            __html: data.aboutJson.content.childMarkdownRemark.html,
+            __html: data.thankYouJson.content.childMarkdownRemark.html,
           }}
         />
-        <hr />
-        <Title as="h3">Get in touch:</Title>
-        <ContactForm />
       </Box>
     </Container>
   </Layout>
 );
 
-About.propTypes = {
+ThankYou.propTypes = {
   data: PropTypes.object.isRequired,
 };
 
-export default About;
+export default ThankYou;
 
 export const query = graphql`
-  query AboutQuery {
-    aboutJson {
+  query ThankYouQuery {
+    thankYouJson {
       title
       content {
         childMarkdownRemark {
