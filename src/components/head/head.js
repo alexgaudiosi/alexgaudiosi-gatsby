@@ -159,6 +159,7 @@ const Head = ({
     <link
       href="https://fonts.googleapis.com/css2?family=EB+Garamond&family=Forum&display=swap"
       rel="stylesheet"
+      defer
     />
 
     <script
