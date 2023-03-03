@@ -22,6 +22,7 @@ const Shopify = ({ data }) => (
             __html: data.shopifyJson.content.childMarkdownRemark.html,
           }}
         />
+        <hr />
         <Gallery items={data.shopifyJson.gallery} />
       </Box>
     </Container>

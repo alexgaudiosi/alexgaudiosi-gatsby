@@ -22,6 +22,7 @@ const Engineering = ({ data }) => (
             __html: data.engineeringJson.content.childMarkdownRemark.html,
           }}
         />
+        <hr />
         <Gallery items={data.engineeringJson.gallery} />
       </Box>
     </Container>

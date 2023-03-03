@@ -4,13 +4,23 @@ import { graphql } from 'gatsby';
 import Layout from 'components/layout';
 import Box from 'components/box';
 import Head from 'components/head';
-import Title from 'components/title';
 import styled from 'styled-components';
 import ContactForm from 'components/contact-form';
+import { accent } from 'constants/theme';
 
 const Container = styled.div`
   max-width: 1100px;
   margin: auto;
+`;
+
+const Contact = styled.div`
+  a {
+    text-decoration: underline ${accent};
+  }
+`;
+
+const Divider = styled.hr`
+  margin: 40px 0;
 `;
 
 const About = ({ data }) => (
@@ -18,13 +28,13 @@ const About = ({ data }) => (
     <Container>
       <Head pageTitle={data.aboutJson.title} />
       <Box>
-        <div
+        <Contact
           dangerouslySetInnerHTML={{
             __html: data.aboutJson.content.childMarkdownRemark.html,
           }}
         />
-        <hr />
-        <Title as="h3">Get in touch:</Title>
+        <Divider />
+        <p>Get in touch:</p>
         <ContactForm />
       </Box>
     </Container>

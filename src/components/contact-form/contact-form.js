@@ -71,7 +71,7 @@ const ContactForm = () => {
         <Input type="email" placeholder="Email" name="email" required />
       </div>
       <div>
-        <Select placeholder="Your message" name="message" required>
+        <Select placeholder="Your message" name="reason" required>
           <option value="">What would you like to talk about?</option>
           <option value="Shopify">Shopify Store</option>
           <option value="Contract">Contract Role</option>

@@ -12,7 +12,7 @@ const Container = styled.div`
   margin: auto;
 
   h3 {
-    margin-bottom: 20x;
+    margin-bottom: 15px;
   }
 `;
 
@@ -24,6 +24,7 @@ const Index = ({ data }) => (
           {data.homeJson.content}
         </Title>
         <Title as="h3">{data.homeJson.subtitle}</Title>
+        <hr />
         <Gallery items={data.homeJson.gallery} />
       </Box>
     </Container>
@@ -51,6 +52,7 @@ export const query = graphql`
           }
         }
         url
+        target
       }
     }
   }

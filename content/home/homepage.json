@@ -2,16 +2,27 @@
   "title": "Home",
   "content": "London based FrontEnd UX Engineer.",
   "subtitle": "Specialising in delivering the best experiences for users - from cutting edge financial systems, to visually immersive e-commerce stores.",
-  "gallery": [{
-    "title": "Shopify Stores",
-    "copy": "E-commerce site builds from agency and freelance projects.",
-    "image": "../images/gallery/shopify-store.jpg",
-    "url": "/shopify/"
+  "gallery": [
+    {
+      "title": "Engineering",
+      "copy": "UX Product Engineering work across the financial and insurance sector.",
+      "image": "../images/gallery/simply-business-covid-hub.jpg",
+      "url": "/engineering/",
+      "target": ""
     },
     {
-    "title": "Engineering",
-    "copy": "UX Product Engineering work across the financial and insurance sector.",
-    "image": "../images/gallery/simply-business-covid-hub.jpg",
-    "url": "/engineering/"
-  }]
+      "title": "Shopify Stores",
+      "copy": "E-commerce site builds from agency and freelance projects.",
+      "image": "../images/gallery/shopify-store.jpg",
+      "url": "/shopify/",
+      "target": ""
+    },
+    {
+      "title": "Work with me on Storetasker",
+      "copy": "Looking to collaborate on Shopify? Reach me on Storetasker and tell me about your project!",
+      "image": "../images/gallery/shopify-project.jpg",
+      "url": "https://www.storetasker.com/experts/alex-gaudiosi",
+      "target": "_blank"
+    }
+  ]
 }
