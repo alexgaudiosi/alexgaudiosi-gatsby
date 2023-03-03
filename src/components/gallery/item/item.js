@@ -16,8 +16,8 @@ const Item = ({ title, copy, image, url, target, rel }) => (
           <h4>{title}</h4>
         </Title>
       </figcaption>
+      <Copy>{copy}</Copy>
     </a>
-    <Copy>{copy}</Copy>
   </figure>
 );
 

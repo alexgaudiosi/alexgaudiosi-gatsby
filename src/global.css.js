@@ -38,7 +38,7 @@ export default createGlobalStyle`
     line-height: 1;
     font-size: 1.6rem;
     color: #1d1d1f;
-    background-color: #f0ece2;
+    background-color: #FFFAFA;
     -webkit-text-size-adjust: 100%;
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
@@ -73,7 +73,11 @@ export default createGlobalStyle`
 
   a {
     color: inherit;
-    text-decoration: underline ${accent};
+    text-decoration: none;
+
+    span {
+      text-decoration: underline ${accent};
+    }
   }
 
   pre {
