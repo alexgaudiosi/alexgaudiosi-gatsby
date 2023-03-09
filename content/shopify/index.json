@@ -45,8 +45,6 @@
     "title": "House of Roxy London",
     "copy": "Boutique jewellery",
     "image": "../images/gallery/house-of-roxy.jpg",
-    "url": "https://houseofroxylondon.com/",
-    "target": "_blank",
     "rel": "noopener noreferrer"
   },
   {
@@ -67,8 +65,6 @@
     "title": "Thatch & Stone",
     "copy": "Handmade homeware",
     "image": "../images/gallery/thatch-and-stone.jpg",
-    "url": "https://thatchandstone.co.uk/",
-    "target": "_blank",
     "rel": "noopener noreferrer"
   }]
 }
