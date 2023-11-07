@@ -1,12 +1,16 @@
 {
-  "parser": "babel-eslint",
   "env": {
     "browser": true,
     "node": true
   },
+  "parser": "@babel/eslint-parser",
+  "parserOptions": {
+    "babelOptions": {
+
+    }
+  },
   "rules": {
     "strict": 0,
-    "no-console": "warn",
     "quotes": [
       "warn",
       "single"
@@ -15,13 +19,10 @@
     "react/prop-types": "warn",
     "no-unused-vars": "warn"
   },
-
   "extends": [
-    "eslint:recommended",
-    "plugin:react/recommended",
     "plugin:jsx-a11y/recommended"
   ],
-  "plugins": ["prettier", "jsx-a11y"],
+  "plugins": ["prettier", "jsx-a11y", "react"],
   "settings": {
     "react": {
       "version": "detect"
