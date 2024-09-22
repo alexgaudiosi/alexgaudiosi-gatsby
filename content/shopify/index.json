@@ -1,12 +1,19 @@
 {
   "title": "Shopify",
   "content": "content.md",
-  "gallery": [{
+  "gallery": [
+  {
+    "title": "Perple",
+    "copy": "High performance sports drinks",
+    "image": "../images/gallery/drink-perple-website.jpg",
+    "url": "https://drinkperple.com/",
+    "target": "_blank",
+    "rel": "noopener noreferrer"
+  },
+  {
     "title": "WIT Fitness",
     "copy": "Elite athlete training gyms and apparel",
     "image": "../images/gallery/wit-fitness.jpg",
-    "url": "https://wit-fitness.com/",
-    "target": "_blank",
     "rel": "noopener noreferrer"
   },
   {
