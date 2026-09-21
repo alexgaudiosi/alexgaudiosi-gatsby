@@ -1,0 +1,347 @@
+import React, { useEffect, useRef, useState } from 'react';
+import styled from 'styled-components';
+
+const LOGOS = [
+  { name: 'Salomon', file: 'salomon.svg' },
+  { name: 'WPP', file: 'wpp.svg' },
+  { name: 'VML', file: 'vml.png' },
+  { name: 'Finisterre', file: 'finisterre.svg', light: true },
+  { name: 'Beauty Bay', file: 'beauty-bay.png' },
+  { name: 'Atomic Skis', file: 'atomic-wordmark.svg' },
+  { name: 'Armada Skis', file: 'armada.svg' },
+  { name: 'Shopify Plus', file: 'shopify-plus.png' },
+  { name: 'Essity', file: 'essity.svg' },
+];
+const MORPH = 2200;
+const CYCLE = MORPH * 3;
+const PARTICLES = 1400;
+
+const Section = styled.section`
+  margin: 2rem 0 3rem;
+  padding: 2.4rem 2.8rem 1.4rem;
+  color: #000;
+  background: #fff8eb;
+  border-top: 1px solid #e8e8e8;
+  border-radius: 3px;
+
+  header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 1.6rem;
+  }
+  h2 {
+    font-size: 2rem;
+    line-height: 1.3;
+  }
+  canvas {
+    display: block;
+    width: 100%;
+    height: 140px;
+  }
+  @media (max-width: 600px) {
+    padding: 2rem 1.6rem 1rem;
+    canvas {
+      height: 300px;
+    }
+  }
+`;
+
+const Fallback = styled.div`
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 2rem;
+  padding: 3rem 0;
+  figure {
+    display: grid;
+    place-items: center;
+    gap: 1rem;
+  }
+  img {
+    width: 100%;
+    max-width: 165px;
+    height: 5rem;
+    object-fit: contain;
+    background: #fff;
+    border-radius: 2px;
+  }
+  figcaption {
+    font-size: 1.4rem;
+    line-height: 1.3;
+  }
+  @media (max-width: 600px) {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+`;
+
+// Extract actual logo pixels, including opaque PNG wordmarks and reversed SVGs.
+function loadLogo(logo) {
+  return new Promise((resolve, reject) => {
+    const image = new Image();
+    image.onload = () => {
+      try {
+        const source = document.createElement('canvas');
+        const scale = Math.min(
+          logo.file.endsWith('.svg') ? Infinity : 1,
+          1200 / image.naturalWidth,
+          600 / image.naturalHeight
+        );
+        source.width = Math.max(1, Math.round(image.naturalWidth * scale));
+        source.height = Math.max(1, Math.round(image.naturalHeight * scale));
+        const context = source.getContext('2d');
+        context.drawImage(image, 0, 0, source.width, source.height);
+        const pixels = context.getImageData(0, 0, source.width, source.height);
+        let left = source.width,
+          top = source.height,
+          right = 0,
+          bottom = 0;
+        for (let y = 0; y < source.height; y++) {
+          for (let x = 0; x < source.width; x++) {
+            const i = (y * source.width + x) * 4;
+            const luminance =
+              (pixels.data[i] + pixels.data[i + 1] + pixels.data[i + 2]) / 3;
+            // Preserve antialiased edges instead of turning them into jagged binary pixels.
+            const coverage =
+              ((logo.light ? luminance : 255 - luminance) *
+                pixels.data[i + 3]) /
+              255;
+            const ink = coverage > 30;
+            pixels.data[i] = 0;
+            pixels.data[i + 1] = 0;
+            pixels.data[i + 2] = 0;
+            pixels.data[i + 3] = coverage;
+            if (ink) {
+              left = Math.min(left, x);
+              right = Math.max(right, x);
+              top = Math.min(top, y);
+              bottom = Math.max(bottom, y);
+            }
+          }
+        }
+        if (right <= left || bottom <= top) throw new Error('Empty wordmark');
+        context.putImageData(pixels, 0, 0);
+        const mask = document.createElement('canvas');
+        const fit = Math.min(
+          600 / (right - left + 1),
+          220 / (bottom - top + 1)
+        );
+        mask.width = Math.round((right - left + 1) * fit);
+        mask.height = Math.round((bottom - top + 1) * fit);
+        const maskContext = mask.getContext('2d');
+        maskContext.drawImage(
+          source,
+          left,
+          top,
+          right - left + 1,
+          bottom - top + 1,
+          0,
+          0,
+          mask.width,
+          mask.height
+        );
+        const data = maskContext.getImageData(0, 0, mask.width, mask.height)
+          .data;
+        const points = [];
+        for (let x = 0; x < mask.width; x += 2) {
+          for (let y = 0; y < mask.height; y += 2) {
+            if (data[(y * mask.width + x) * 4 + 3] > 100)
+              points.push([
+                (x - mask.width / 2) / 2,
+                (y - mask.height / 2) / 2,
+              ]);
+          }
+        }
+        if (!points.length) throw new Error('Empty particle mask');
+        resolve({
+          mask,
+          points: Array.from(
+            { length: PARTICLES },
+            (_, i) => points[Math.floor((i * points.length) / PARTICLES)]
+          ),
+        });
+      } catch (error) {
+        reject(error);
+      }
+    };
+    image.onerror = reject;
+    image.src = `/logos/${logo.file}`;
+  });
+}
+
+const LogoMorph = () => {
+  const canvasRef = useRef(null);
+  const [ready, setReady] = useState(false);
+  const [reducedMotion, setReducedMotion] = useState(false);
+
+  useEffect(() => {
+    const media = window.matchMedia('(prefers-reduced-motion: reduce)');
+    const update = () => setReducedMotion(media.matches);
+    update();
+    media.addListener(update);
+    return () => media.removeListener(update);
+  }, []);
+
+  useEffect(() => {
+    if (reducedMotion) return undefined;
+    const canvas = canvasRef.current;
+    const context = canvas.getContext('2d');
+    if (!context) return undefined;
+    let disposed = false,
+      frame,
+      elapsed = 0,
+      last = 0,
+      visible = true;
+    const pointer = { x: -1000, y: -1000 };
+    const move = event => {
+      const bounds = canvas.getBoundingClientRect();
+      pointer.x = event.clientX - bounds.left;
+      pointer.y = event.clientY - bounds.top;
+    };
+    const leave = () => {
+      pointer.x = -1000;
+      pointer.y = -1000;
+    };
+    canvas.addEventListener('pointermove', move);
+    canvas.addEventListener('pointerleave', leave);
+    const observer =
+      typeof IntersectionObserver !== 'undefined'
+        ? new IntersectionObserver(([entry]) => {
+            visible = entry.isIntersecting;
+          })
+        : null;
+    if (observer) observer.observe(canvas);
+
+    Promise.all(LOGOS.map(loadLogo))
+      .then(logos => {
+        if (disposed) return;
+        setReady(true);
+        const draw = now => {
+          if (disposed) return;
+          const delta = last ? Math.min(now - last, 50) : 0;
+          last = now;
+          if (visible && !document.hidden) {
+            elapsed += delta;
+            const width = canvas.clientWidth;
+            const height = canvas.clientHeight;
+            const ratio = Math.min(window.devicePixelRatio || 1, 2);
+            if (
+              canvas.width !== Math.round(width * ratio) ||
+              canvas.height !== Math.round(height * ratio)
+            ) {
+              canvas.width = Math.round(width * ratio);
+              canvas.height = Math.round(height * ratio);
+            }
+            context.setTransform(ratio, 0, 0, ratio, 0, 0);
+            context.clearRect(0, 0, width, height);
+            const stacked = window.matchMedia('(max-width: 600px)').matches;
+            const cellWidth = stacked ? width : width / 3;
+            const cellHeight = stacked ? height / 3 : height;
+            const round = Math.floor(elapsed / CYCLE);
+            for (let slot = 0; slot < 3; slot++) {
+              const from = logos[(round * 3 + slot) % logos.length];
+              const to = logos[((round + 1) * 3 + slot) % logos.length];
+              const progress = Math.max(
+                0,
+                Math.min(1, ((elapsed % CYCLE) - slot * MORPH) / MORPH)
+              );
+              const ease = progress * progress * (3 - 2 * progress);
+              const burst = Math.sin(progress * Math.PI);
+              const cx = stacked ? width / 2 : cellWidth * (slot + 0.5);
+              const cy = stacked ? cellHeight * (slot + 0.5) : height / 2;
+              const fit = Math.min(0.55, (cellWidth - 32) / 300);
+              const current = progress < 0.5 ? from : to;
+              const solidOpacity = Math.max(0, 1 - burst * 3);
+              context.globalAlpha = solidOpacity;
+              context.drawImage(
+                current.mask,
+                cx - (current.mask.width * fit) / 4,
+                cy - (current.mask.height * fit) / 4,
+                (current.mask.width * fit) / 2,
+                (current.mask.height * fit) / 2
+              );
+              if (burst > 0) {
+                context.globalAlpha = Math.min(1, burst * 3);
+                for (let i = 0; i < PARTICLES; i++) {
+                  const a = from.points[i],
+                    b = to.points[i];
+                  let x =
+                    cx +
+                    (a[0] +
+                      (b[0] - a[0]) * ease +
+                      Math.sin(i * 12.989) * 48 * burst) *
+                      fit;
+                  let y =
+                    cy +
+                    (a[1] +
+                      (b[1] - a[1]) * ease +
+                      Math.cos(i * 7.13) * 38 * burst) *
+                      fit;
+                  const dx = x - pointer.x,
+                    dy = y - pointer.y;
+                  const distance = Math.sqrt(dx * dx + dy * dy);
+                  if (distance < 65 && distance > 0) {
+                    const push = (1 - distance / 65) * 15 * burst;
+                    x += (dx / distance) * push;
+                    y += (dy / distance) * push;
+                  }
+                  context.fillStyle = '#000';
+                  context.fillRect(
+                    x,
+                    y,
+                    Math.max(0.8, fit * 1.35),
+                    Math.max(0.8, fit * 1.35)
+                  );
+                }
+              }
+            }
+            context.globalAlpha = 1;
+          }
+          frame = window.requestAnimationFrame(draw);
+        };
+        frame = window.requestAnimationFrame(draw);
+      })
+      .catch(() => {
+        if (!disposed) setReady(false);
+      });
+
+    return () => {
+      disposed = true;
+      window.cancelAnimationFrame(frame);
+      if (observer) observer.disconnect();
+      canvas.removeEventListener('pointermove', move);
+      canvas.removeEventListener('pointerleave', leave);
+    };
+  }, [reducedMotion]);
+
+  return (
+    <Section aria-labelledby="company-wordmarks-heading">
+ 
+      <canvas
+        ref={canvasRef}
+        role="img"
+        aria-label={LOGOS.map(logo => logo.name).join(', ')}
+        style={{ display: ready && !reducedMotion ? 'block' : 'none' }}
+      />
+      {(!ready || reducedMotion) && (
+        <Fallback>
+          {LOGOS.map(logo => (
+            <figure key={logo.name}>
+              <img
+                src={`/logos/${logo.file}`}
+                alt={logo.name}
+                style={{
+                  filter: logo.light
+                    ? 'invert(1) grayscale(1)'
+                    : 'grayscale(1) contrast(10)',
+                }}
+              />
+              <figcaption>{logo.name}</figcaption>
+            </figure>
+          ))}
+        </Fallback>
+      )}
+    </Section>
+  );
+};
+
+export default LogoMorph;

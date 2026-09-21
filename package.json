@@ -67,7 +67,6 @@
     "gatsby-plugin-netlify": "^5.1.1",
     "lighthouse": "^4.0.0",
     "mkdirp": "^0.5.1",
-    "node-gyp": "^3.8.0",
     "prettier": "^1.16.0"
   }
 }
