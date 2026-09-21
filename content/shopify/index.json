@@ -3,10 +3,41 @@
   "content": "content.md",
   "gallery": [
   {
+    "title": "Salomon",
+    "copy": "World renowned runner's sports brand",
+    "image": "../images/gallery/salomon.png",
+    "url": "https://www.salomon.com/",
+    "target": "_blank",
+    "rel": "noopener noreferrer"
+  },    
+  {
+    "title": "Armada Skis",
+    "copy": "Freeskier stunt performers' skis & snowboards",
+    "image": "../images/gallery/armada.png",
+    "url": "https://www.armadaskis.com/",
+    "target": "_blank",
+    "rel": "noopener noreferrer"
+  },    
+  {
+    "title": "Atomic Skis",
+    "copy": "Racing heritage ski crafters",
+    "image": "../images/gallery/atomic.png",
+    "url": "https://atomic.com/",
+    "target": "_blank",
+    "rel": "noopener noreferrer"
+  },
+  {
+    "title": "Beauty Bay | Samplr",
+    "copy": "In-house Beauty Bay brand",
+    "image": "../images/gallery/samplr.png",
+    "url": "https://www.beautybay.com/",
+    "target": "_blank",
+    "rel": "noopener noreferrer"
+  },
+  {
     "title": "Perple",
     "copy": "High performance sports drinks",
     "image": "../images/gallery/drink-perple-website.jpg",
-    "url": "https://drinkperple.com/",
     "target": "_blank",
     "rel": "noopener noreferrer"
   },
