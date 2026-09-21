@@ -255,14 +255,76 @@ const LogoMorph = () => {
               const fit = Math.min(0.55, (cellWidth - 32) / 300);
               const current = progress < 0.5 ? from : to;
               const solidOpacity = Math.max(0, 1 - burst * 3);
+              const pointerDistance = Math.sqrt(
+                (pointer.x - cx) ** 2 + (pointer.y - cy) ** 2
+              );
+              const hover = Math.max(
+                0,
+                1 - pointerDistance / Math.max(cellWidth, cellHeight) / 0.7
+              );
+              const logoWidth = (current.mask.width * fit) / 2;
+              const logoHeight = (current.mask.height * fit) / 2;
+              const hoverScale = 1 + hover * 0.02;
+              const hoverOffsetX = (pointer.x - cx) * hover * 0.02;
+              const hoverOffsetY = (pointer.y - cy) * hover * 0.02;
               context.globalAlpha = solidOpacity;
               context.drawImage(
                 current.mask,
-                cx - (current.mask.width * fit) / 4,
-                cy - (current.mask.height * fit) / 4,
-                (current.mask.width * fit) / 2,
-                (current.mask.height * fit) / 2
+                cx - (logoWidth * hoverScale) / 2 + hoverOffsetX,
+                cy - (logoHeight * hoverScale) / 2 + hoverOffsetY,
+                logoWidth * hoverScale,
+                logoHeight * hoverScale
               );
+              if (burst < 0.05 && hover > 0) {
+                const particleSize = Math.max(1, fit * 1.8);
+                context.globalCompositeOperation = 'destination-out';
+                for (let i = 0; i < PARTICLES; i++) {
+                  const point = current.points[i];
+                  const pointX =
+                    cx + point[0] * fit * hoverScale + hoverOffsetX;
+                  const pointY =
+                    cy + point[1] * fit * hoverScale + hoverOffsetY;
+                  const dx = pointX - pointer.x;
+                  const dy = pointY - pointer.y;
+                  const distance = Math.sqrt(dx * dx + dy * dy);
+                  const influence = Math.max(0, 1 - distance / 100) * hover;
+                  if (influence <= 0) continue;
+                  context.fillRect(
+                    pointX - particleSize / 2,
+                    pointY - particleSize / 2,
+                    particleSize,
+                    particleSize
+                  );
+                }
+                context.globalCompositeOperation = 'source-over';
+                context.fillStyle = '#000';
+                for (let i = 0; i < PARTICLES; i++) {
+                  const point = current.points[i];
+                  const pointX =
+                    cx + point[0] * fit * hoverScale + hoverOffsetX;
+                  const pointY =
+                    cy + point[1] * fit * hoverScale + hoverOffsetY;
+                  const dx = pointX - pointer.x;
+                  const dy = pointY - pointer.y;
+                  const distance = Math.sqrt(dx * dx + dy * dy);
+                  const influence = Math.max(0, 1 - distance / 100) * hover;
+                  if (influence <= 0) continue;
+                  const wave =
+                    Math.sin(distance * 0.18 - elapsed * 0.012) *
+                    28 *
+                    influence;
+                  const directionX = distance ? dx / distance : 0;
+                  const directionY = distance ? dy / distance : 0;
+                  context.globalAlpha = Math.min(1, influence * 2.5);
+                  context.fillRect(
+                    pointX + directionX * wave - particleSize / 2,
+                    pointY + directionY * wave - particleSize / 2,
+                    particleSize,
+                    particleSize
+                  );
+                }
+                context.globalAlpha = 1;
+              }
               if (burst > 0) {
                 context.globalAlpha = Math.min(1, burst * 3);
                 for (let i = 0; i < PARTICLES; i++) {

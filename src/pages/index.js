@@ -4,6 +4,7 @@ import Layout from 'components/layout';
 import Box from 'components/box';
 import Title from 'components/title';
 import Gallery from 'components/gallery';
+import SiteHead from 'components/head';
 import LogoMorph from 'components/logo-morph/logo-morph';
 import WorkCarousel from 'components/work-carousel/work-carousel';
 import styled from 'styled-components';
@@ -58,6 +59,10 @@ Index.propTypes = {
 };
 
 export default Index;
+
+export const Head = ({ data, location }) => (
+  <SiteHead pageTitle={data.homeJson.title} location={location} />
+);
 
 export const query = graphql`
   query HomepageQuery {

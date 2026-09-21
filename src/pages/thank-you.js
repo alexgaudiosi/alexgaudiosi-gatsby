@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import { graphql } from 'gatsby';
 import Layout from 'components/layout';
 import Box from 'components/box';
-import Head from 'components/head';
+import SiteHead from 'components/head';
 import styled from 'styled-components';
 
 const Container = styled.div`
@@ -14,7 +14,6 @@ const Container = styled.div`
 const ThankYou = ({ data }) => (
   <Layout>
     <Container>
-      <Head pageTitle={data.thankYouJson.title} />
       <Box>
         <div
           dangerouslySetInnerHTML={{
@@ -31,6 +30,10 @@ ThankYou.propTypes = {
 };
 
 export default ThankYou;
+
+export const Head = ({ data, location }) => (
+  <SiteHead pageTitle={data.thankYouJson.title} location={location} />
+);
 
 export const query = graphql`
   query ThankYouQuery {

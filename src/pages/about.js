@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import { graphql } from 'gatsby';
 import Layout from 'components/layout';
 import Box from 'components/box';
-import Head from 'components/head';
+import SiteHead from 'components/head';
 import styled from 'styled-components';
 import ContactForm from 'components/contact-form';
 import { accent } from 'constants/theme';
@@ -26,7 +26,6 @@ const Divider = styled.hr`
 const About = ({ data }) => (
   <Layout>
     <Container>
-      <Head pageTitle={data.aboutJson.title} />
       <Box>
         <Contact
           dangerouslySetInnerHTML={{
@@ -46,6 +45,10 @@ About.propTypes = {
 };
 
 export default About;
+
+export const Head = ({ data, location }) => (
+  <SiteHead pageTitle={data.aboutJson.title} location={location} />
+);
 
 export const query = graphql`
   query AboutQuery {
