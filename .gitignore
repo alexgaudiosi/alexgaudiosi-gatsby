@@ -11,3 +11,7 @@ yarn-error.log*
 .cache/
 public
 build
+
+# Local agent session artifacts
+documentation/sessions/*
+!documentation/sessions/.gitkeep

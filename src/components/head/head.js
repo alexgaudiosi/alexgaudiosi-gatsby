@@ -1,8 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { Helmet } from 'react-helmet';
 import { StaticQuery, graphql } from 'gatsby';
-import { Location } from '@reach/router';
 import schemaGenerator from 'helpers/schemaGenerator';
 
 const Head = ({
@@ -17,7 +15,7 @@ const Head = ({
   location,
   canonical = siteUrl + (location.pathname || ''),
 }) => (
-  <Helmet>
+  <>
     <html lang="en" />
 
     <meta content="IE=edge" httpEquiv="X-UA-Compatible" />
@@ -188,7 +186,7 @@ const Head = ({
         })
       )}
     </script>
-  </Helmet>
+  </>
 );
 
 Head.propTypes = {
@@ -205,7 +203,7 @@ Head.propTypes = {
   location: PropTypes.object.isRequired,
 };
 
-const HeadWithQuery = props => (
+const HeadWithQuery = ({ location, ...props }) => (
   <StaticQuery
     query={graphql`
       query {
@@ -224,11 +222,7 @@ const HeadWithQuery = props => (
       }
     `}
     render={data => (
-      <Location>
-        {({ location }) => (
-          <Head {...data.site.siteMetadata} {...props} location={location} />
-        )}
-      </Location>
+      <Head {...data.site.siteMetadata} {...props} location={location} />
     )}
   />
 );

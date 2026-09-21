@@ -7,14 +7,33 @@ const LOGOS = [
   { name: 'VML', file: 'vml.png' },
   { name: 'Finisterre', file: 'finisterre.svg', light: true },
   { name: 'Beauty Bay', file: 'beauty-bay.png' },
-  { name: 'Atomic Skis', file: 'atomic-wordmark.svg' },
+  { name: 'Atomic Skis', file: 'atomic-logo.png' },
   { name: 'Armada Skis', file: 'armada.svg' },
   { name: 'Shopify Plus', file: 'shopify-plus.png' },
   { name: 'Essity', file: 'essity.svg' },
+  { name: 'Selfridges', file: 'selfridges.png' },
+  { name: 'Fenwick', file: 'fenwick.webp' },
+  { name: 'Vileda', file: 'vileda.png' },
+  { name: 'Lindt', file: 'lindt.png' },
+  { name: 'TENA', file: 'tena-seeklogo.png' },
+  { name: 'British American Tobacco', file: 'british-american-tobacco-seeklogo.png' },
+  { name: 'Guinness', file: 'guinness.png' },
+  { name: 'AKQA', file: 'akqa.svg' },
+  { name: 'Amer Sports', file: 'amer-sport.png' },
 ];
 const MORPH = 2200;
-const CYCLE = MORPH * 3;
+const COLUMNS = 4;
+const CYCLE = MORPH * COLUMNS;
 const PARTICLES = 1400;
+
+function shuffleLogos(logos) {
+  const shuffled = [...logos];
+  for (let i = shuffled.length - 1; i > 0; i--) {
+    const j = Math.floor(Math.random() * (i + 1));
+    [shuffled[i], shuffled[j]] = [shuffled[j], shuffled[i]];
+  }
+  return shuffled;
+}
 
 const Section = styled.section`
   margin: 2rem 0 3rem;
@@ -50,7 +69,7 @@ const Section = styled.section`
 
 const Fallback = styled.div`
   display: grid;
-  grid-template-columns: repeat(3, minmax(0, 1fr));
+  grid-template-columns: repeat(4, minmax(0, 1fr));
   gap: 2rem;
   padding: 3rem 0;
   figure {
@@ -175,6 +194,7 @@ const LogoMorph = () => {
   const [ready, setReady] = useState(false);
   const [failed, setFailed] = useState(false);
   const [reducedMotion, setReducedMotion] = useState(false);
+  const [displayLogos, setDisplayLogos] = useState(LOGOS);
 
   useEffect(() => {
     setMounted(true);
@@ -186,6 +206,8 @@ const LogoMorph = () => {
   }, []);
 
   useEffect(() => {
+    const logos = shuffleLogos(LOGOS);
+    setDisplayLogos(logos);
     if (reducedMotion) return undefined;
     const canvas = canvasRef.current;
     const context = canvas.getContext('2d');
@@ -215,7 +237,7 @@ const LogoMorph = () => {
         : null;
     if (observer) observer.observe(canvas);
 
-    Promise.all(LOGOS.map(loadLogo))
+    Promise.all(logos.map(loadLogo))
       .then(logos => {
         if (disposed) return;
         setReady(true);
@@ -237,32 +259,99 @@ const LogoMorph = () => {
             }
             context.setTransform(ratio, 0, 0, ratio, 0, 0);
             context.clearRect(0, 0, width, height);
-            const stacked = window.matchMedia('(max-width: 600px)').matches;
-            const cellWidth = stacked ? width : width / 3;
-            const cellHeight = stacked ? height / 3 : height;
+            const mobileGrid = window.matchMedia('(max-width: 600px)').matches;
+            const cellWidth = width / (mobileGrid ? 2 : COLUMNS);
+            const cellHeight = mobileGrid ? height / 2 : height;
             const round = Math.floor(elapsed / CYCLE);
-            for (let slot = 0; slot < 3; slot++) {
-              const from = logos[(round * 3 + slot) % logos.length];
-              const to = logos[((round + 1) * 3 + slot) % logos.length];
+            for (let slot = 0; slot < COLUMNS; slot++) {
+              const from = logos[(round * COLUMNS + slot) % logos.length];
+              const to =
+                logos[((round + 1) * COLUMNS + slot) % logos.length];
               const progress = Math.max(
                 0,
                 Math.min(1, ((elapsed % CYCLE) - slot * MORPH) / MORPH)
               );
               const ease = progress * progress * (3 - 2 * progress);
               const burst = Math.sin(progress * Math.PI);
-              const cx = stacked ? width / 2 : cellWidth * (slot + 0.5);
-              const cy = stacked ? cellHeight * (slot + 0.5) : height / 2;
+              const cx = mobileGrid
+                ? cellWidth * (slot % 2 + 0.5)
+                : cellWidth * (slot + 0.5);
+              const cy = mobileGrid
+                ? cellHeight * (Math.floor(slot / 2) + 0.5)
+                : height / 2;
               const fit = Math.min(0.55, (cellWidth - 32) / 300);
               const current = progress < 0.5 ? from : to;
               const solidOpacity = Math.max(0, 1 - burst * 3);
+              const pointerDistance = Math.sqrt(
+                (pointer.x - cx) ** 2 + (pointer.y - cy) ** 2
+              );
+              const hover = Math.max(
+                0,
+                1 - pointerDistance / Math.max(cellWidth, cellHeight) / 0.7
+              );
+              const logoWidth = (current.mask.width * fit) / 2;
+              const logoHeight = (current.mask.height * fit) / 2;
+              const hoverScale = 1 + hover * 0.02;
+              const hoverOffsetX = (pointer.x - cx) * hover * 0.02;
+              const hoverOffsetY = (pointer.y - cy) * hover * 0.02;
               context.globalAlpha = solidOpacity;
               context.drawImage(
                 current.mask,
-                cx - (current.mask.width * fit) / 4,
-                cy - (current.mask.height * fit) / 4,
-                (current.mask.width * fit) / 2,
-                (current.mask.height * fit) / 2
+                cx - (logoWidth * hoverScale) / 2 + hoverOffsetX,
+                cy - (logoHeight * hoverScale) / 2 + hoverOffsetY,
+                logoWidth * hoverScale,
+                logoHeight * hoverScale
               );
+              if (burst < 0.05 && hover > 0) {
+                const particleSize = Math.max(1, fit * 1.8);
+                context.globalCompositeOperation = 'destination-out';
+                for (let i = 0; i < PARTICLES; i++) {
+                  const point = current.points[i];
+                  const pointX =
+                    cx + point[0] * fit * hoverScale + hoverOffsetX;
+                  const pointY =
+                    cy + point[1] * fit * hoverScale + hoverOffsetY;
+                  const dx = pointX - pointer.x;
+                  const dy = pointY - pointer.y;
+                  const distance = Math.sqrt(dx * dx + dy * dy);
+                  const influence = Math.max(0, 1 - distance / 100) * hover;
+                  if (influence <= 0) continue;
+                  context.fillRect(
+                    pointX - particleSize / 2,
+                    pointY - particleSize / 2,
+                    particleSize,
+                    particleSize
+                  );
+                }
+                context.globalCompositeOperation = 'source-over';
+                context.fillStyle = '#000';
+                for (let i = 0; i < PARTICLES; i++) {
+                  const point = current.points[i];
+                  const pointX =
+                    cx + point[0] * fit * hoverScale + hoverOffsetX;
+                  const pointY =
+                    cy + point[1] * fit * hoverScale + hoverOffsetY;
+                  const dx = pointX - pointer.x;
+                  const dy = pointY - pointer.y;
+                  const distance = Math.sqrt(dx * dx + dy * dy);
+                  const influence = Math.max(0, 1 - distance / 100) * hover;
+                  if (influence <= 0) continue;
+                  const wave =
+                    Math.sin(distance * 0.18 - elapsed * 0.012) *
+                    28 *
+                    influence;
+                  const directionX = distance ? dx / distance : 0;
+                  const directionY = distance ? dy / distance : 0;
+                  context.globalAlpha = Math.min(1, influence * 2.5);
+                  context.fillRect(
+                    pointX + directionX * wave - particleSize / 2,
+                    pointY + directionY * wave - particleSize / 2,
+                    particleSize,
+                    particleSize
+                  );
+                }
+                context.globalAlpha = 1;
+              }
               if (burst > 0) {
                 context.globalAlpha = Math.min(1, burst * 3);
                 for (let i = 0; i < PARTICLES; i++) {
@@ -326,12 +415,12 @@ const LogoMorph = () => {
       <canvas
         ref={canvasRef}
         role="img"
-        aria-label={LOGOS.map(logo => logo.name).join(', ')}
+        aria-label={displayLogos.map(logo => logo.name).join(', ')}
         style={{ display: ready && !reducedMotion ? 'block' : 'none' }}
       />
       {(!ready || reducedMotion) && (
         <Fallback>
-          {LOGOS.map(logo => (
+          {displayLogos.map(logo => (
             <figure key={logo.name}>
               <img
                 src={`/logos/${logo.file}`}

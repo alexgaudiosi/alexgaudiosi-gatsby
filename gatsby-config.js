@@ -18,11 +18,10 @@ module.exports = {
         path: `${__dirname}/content/images`,
       },
     },
-    'gatsby-plugin-react-helmet',
     'gatsby-plugin-sitemap',
     'gatsby-plugin-offline',
+    'gatsby-plugin-netlify',
     'gatsby-transformer-json',
-    'gatsby-plugin-eslint',
     {
       resolve: 'gatsby-source-filesystem',
       options: {
@@ -39,15 +38,6 @@ module.exports = {
           production: {
             policy: [{ userAgent: '*', allow: '/' }],
           },
-        },
-      },
-    },
-    'gatsby-plugin-webpack-size',
-    {
-      resolve: 'gatsby-plugin-react-svg',
-      options: {
-        rule: {
-          include: /images\/.*\.svg$/,
         },
       },
     },

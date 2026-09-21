@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import { graphql } from 'gatsby';
 import Layout from 'components/layout';
 import Box from 'components/box';
-import Head from 'components/head';
+import SiteHead from 'components/head';
 import Gallery from 'components/gallery';
 import styled from 'styled-components';
 
@@ -15,7 +15,6 @@ const Container = styled.div`
 const Shopify = ({ data }) => (
   <Layout>
     <Container>
-      <Head pageTitle={data.shopifyJson.title} />
       <Box>
         <div
           dangerouslySetInnerHTML={{
@@ -34,6 +33,10 @@ Shopify.propTypes = {
 };
 
 export default Shopify;
+
+export const Head = ({ data, location }) => (
+  <SiteHead pageTitle={data.shopifyJson.title} location={location} />
+);
 
 export const query = graphql`
   query ShopifyQuery {

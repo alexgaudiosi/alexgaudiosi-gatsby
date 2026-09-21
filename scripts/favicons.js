@@ -1,4 +1,4 @@
-const favicons = require('favicons');
+const { default: favicons } = require('favicons');
 const path = require('path');
 const fs = require('fs');
 
@@ -28,7 +28,6 @@ const configuration = {
   orientation: 'any',
   start_url: '/',
   version: '1.0',
-  logging: true,
   icons: {
     android: true,
     appleIcon: true,
@@ -41,12 +40,8 @@ const configuration = {
   },
 };
 
-const callback = function(err, res) {
-  if (err) {
-    console.log(err.message);
-    return;
-  }
-
+favicons(source, configuration)
+  .then(res => {
   res.images.forEach(image => {
     fs.writeFile(
       path.resolve(__dirname, '../public/icons/', image.name),
@@ -70,6 +65,8 @@ const callback = function(err, res) {
       }
     );
   });
-};
-
-favicons(source, configuration, callback);
+  })
+  .catch(error => {
+    console.error(error.message);
+    process.exitCode = 1;
+  });
