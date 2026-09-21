@@ -19,6 +19,7 @@ const PARTICLES = 1400;
 const Section = styled.section`
   margin: 2rem 0 3rem;
   padding: 2.4rem 2.8rem 1.4rem;
+  visibility: ${({ $visible }) => ($visible ? 'visible' : 'hidden')};
   color: #000;
   background: #fff8eb;
   border-top: 1px solid #e8e8e8;
@@ -170,10 +171,13 @@ function loadLogo(logo) {
 
 const LogoMorph = () => {
   const canvasRef = useRef(null);
+  const [mounted, setMounted] = useState(false);
   const [ready, setReady] = useState(false);
+  const [failed, setFailed] = useState(false);
   const [reducedMotion, setReducedMotion] = useState(false);
 
   useEffect(() => {
+    setMounted(true);
     const media = window.matchMedia('(prefers-reduced-motion: reduce)');
     const update = () => setReducedMotion(media.matches);
     update();
@@ -301,7 +305,7 @@ const LogoMorph = () => {
         frame = window.requestAnimationFrame(draw);
       })
       .catch(() => {
-        if (!disposed) setReady(false);
+          if (!disposed) setFailed(true);
       });
 
     return () => {
@@ -314,7 +318,10 @@ const LogoMorph = () => {
   }, [reducedMotion]);
 
   return (
-    <Section aria-labelledby="company-wordmarks-heading">
+    <Section
+      $visible={mounted && (ready || reducedMotion || failed)}
+      aria-labelledby="company-wordmarks-heading"
+    >
  
       <canvas
         ref={canvasRef}
