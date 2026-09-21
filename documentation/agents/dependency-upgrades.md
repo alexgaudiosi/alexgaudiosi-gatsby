@@ -16,7 +16,7 @@
 - Removed unused Gatsby SVG loader, legacy router, and unused modal showcase dependencies.
 - Removed the unused IntersectionObserver demo and polyfill.
 - Enabled `gatsby-plugin-netlify`.
-- Added `.nvmrc` with Node 20 for Favicons 7.
+- Added `.nvmrc` with Node 22 for Favicons 7 and the current sanitize-html engine requirement.
 
 ## Validation
 
