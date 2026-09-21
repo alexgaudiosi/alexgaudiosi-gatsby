@@ -7,14 +7,33 @@ const LOGOS = [
   { name: 'VML', file: 'vml.png' },
   { name: 'Finisterre', file: 'finisterre.svg', light: true },
   { name: 'Beauty Bay', file: 'beauty-bay.png' },
-  { name: 'Atomic Skis', file: 'atomic-wordmark.svg' },
+  { name: 'Atomic Skis', file: 'atomic-logo.png' },
   { name: 'Armada Skis', file: 'armada.svg' },
   { name: 'Shopify Plus', file: 'shopify-plus.png' },
   { name: 'Essity', file: 'essity.svg' },
+  { name: 'Selfridges', file: 'selfridges.png' },
+  { name: 'Fenwick', file: 'fenwick.webp' },
+  { name: 'Vileda', file: 'vileda.png' },
+  { name: 'Lindt', file: 'lindt.png' },
+  { name: 'TENA', file: 'tena-seeklogo.png' },
+  { name: 'British American Tobacco', file: 'british-american-tobacco-seeklogo.png' },
+  { name: 'Guinness', file: 'guinness.png' },
+  { name: 'AKQA', file: 'akqa.svg' },
+  { name: 'Amer Sports', file: 'amer-sport.png' },
 ];
 const MORPH = 2200;
-const CYCLE = MORPH * 3;
+const COLUMNS = 4;
+const CYCLE = MORPH * COLUMNS;
 const PARTICLES = 1400;
+
+function shuffleLogos(logos) {
+  const shuffled = [...logos];
+  for (let i = shuffled.length - 1; i > 0; i--) {
+    const j = Math.floor(Math.random() * (i + 1));
+    [shuffled[i], shuffled[j]] = [shuffled[j], shuffled[i]];
+  }
+  return shuffled;
+}
 
 const Section = styled.section`
   margin: 2rem 0 3rem;
@@ -50,7 +69,7 @@ const Section = styled.section`
 
 const Fallback = styled.div`
   display: grid;
-  grid-template-columns: repeat(3, minmax(0, 1fr));
+  grid-template-columns: repeat(4, minmax(0, 1fr));
   gap: 2rem;
   padding: 3rem 0;
   figure {
@@ -175,6 +194,7 @@ const LogoMorph = () => {
   const [ready, setReady] = useState(false);
   const [failed, setFailed] = useState(false);
   const [reducedMotion, setReducedMotion] = useState(false);
+  const [displayLogos, setDisplayLogos] = useState(LOGOS);
 
   useEffect(() => {
     setMounted(true);
@@ -186,6 +206,8 @@ const LogoMorph = () => {
   }, []);
 
   useEffect(() => {
+    const logos = shuffleLogos(LOGOS);
+    setDisplayLogos(logos);
     if (reducedMotion) return undefined;
     const canvas = canvasRef.current;
     const context = canvas.getContext('2d');
@@ -215,7 +237,7 @@ const LogoMorph = () => {
         : null;
     if (observer) observer.observe(canvas);
 
-    Promise.all(LOGOS.map(loadLogo))
+    Promise.all(logos.map(loadLogo))
       .then(logos => {
         if (disposed) return;
         setReady(true);
@@ -237,21 +259,26 @@ const LogoMorph = () => {
             }
             context.setTransform(ratio, 0, 0, ratio, 0, 0);
             context.clearRect(0, 0, width, height);
-            const stacked = window.matchMedia('(max-width: 600px)').matches;
-            const cellWidth = stacked ? width : width / 3;
-            const cellHeight = stacked ? height / 3 : height;
+            const mobileGrid = window.matchMedia('(max-width: 600px)').matches;
+            const cellWidth = width / (mobileGrid ? 2 : COLUMNS);
+            const cellHeight = mobileGrid ? height / 2 : height;
             const round = Math.floor(elapsed / CYCLE);
-            for (let slot = 0; slot < 3; slot++) {
-              const from = logos[(round * 3 + slot) % logos.length];
-              const to = logos[((round + 1) * 3 + slot) % logos.length];
+            for (let slot = 0; slot < COLUMNS; slot++) {
+              const from = logos[(round * COLUMNS + slot) % logos.length];
+              const to =
+                logos[((round + 1) * COLUMNS + slot) % logos.length];
               const progress = Math.max(
                 0,
                 Math.min(1, ((elapsed % CYCLE) - slot * MORPH) / MORPH)
               );
               const ease = progress * progress * (3 - 2 * progress);
               const burst = Math.sin(progress * Math.PI);
-              const cx = stacked ? width / 2 : cellWidth * (slot + 0.5);
-              const cy = stacked ? cellHeight * (slot + 0.5) : height / 2;
+              const cx = mobileGrid
+                ? cellWidth * (slot % 2 + 0.5)
+                : cellWidth * (slot + 0.5);
+              const cy = mobileGrid
+                ? cellHeight * (Math.floor(slot / 2) + 0.5)
+                : height / 2;
               const fit = Math.min(0.55, (cellWidth - 32) / 300);
               const current = progress < 0.5 ? from : to;
               const solidOpacity = Math.max(0, 1 - burst * 3);
@@ -388,12 +415,12 @@ const LogoMorph = () => {
       <canvas
         ref={canvasRef}
         role="img"
-        aria-label={LOGOS.map(logo => logo.name).join(', ')}
+        aria-label={displayLogos.map(logo => logo.name).join(', ')}
         style={{ display: ready && !reducedMotion ? 'block' : 'none' }}
       />
       {(!ready || reducedMotion) && (
         <Fallback>
-          {LOGOS.map(logo => (
+          {displayLogos.map(logo => (
             <figure key={logo.name}>
               <img
                 src={`/logos/${logo.file}`}
