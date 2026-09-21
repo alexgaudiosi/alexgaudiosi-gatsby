@@ -52,12 +52,7 @@ export const query = graphql`
         copy
         image {
           childImageSharp {
-            gatsbyImageData(
-              width: 1800
-              height: 500
-              quality: 90
-              layout: CONSTRAINED
-            )
+            gatsbyImageData(height: 500, quality: 90, layout: FULL_WIDTH)
           }
         }
         url
