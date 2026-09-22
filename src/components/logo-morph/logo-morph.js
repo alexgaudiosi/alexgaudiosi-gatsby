@@ -19,6 +19,7 @@ const LOGOS = [
   { name: 'British American Tobacco', file: 'british-american-tobacco-seeklogo.png' },
   { name: 'Guinness', file: 'guinness.png' },
   { name: 'AKQA', file: 'akqa.svg' },
+  { name: 'Peak Performance', file: 'peak-performance-logo.svg' },
   { name: 'Amer Sports', file: 'amer-sport.png' },
 ];
 const MORPH = 2200;

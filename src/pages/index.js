@@ -39,7 +39,7 @@ const Index = ({ data }) => {
     <Layout>
       <Container>
         <Box>
-          <Title as="h2" size="large">
+          <Title as="h2" emphasized size="large">
             {data.homeJson.content}
           </Title>
           <Title as="h3">{data.homeJson.subtitle}</Title>
