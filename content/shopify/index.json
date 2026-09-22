@@ -4,7 +4,7 @@
   "gallery": [
   {
     "title": "Salomon",
-    "copy": "World renowned runner's sports brand",
+    "copy": "Global runner's sports brand",
     "image": "../images/gallery/salomon.png",
     "url": "https://www.salomon.com/",
     "target": "_blank",
@@ -27,6 +27,14 @@
     "rel": "noopener noreferrer"
   },
   {
+    "title": "Peak Performance",
+    "copy": "Swedish winter sports brand",
+    "image": "../images/gallery/peak-performance.png",
+    "url": "https://peakperformance.com/",
+    "target": "_blank",
+    "rel": "noopener noreferrer"
+  },  
+  {
     "title": "Beauty Bay | Samplr",
     "copy": "In-house Beauty Bay brand",
     "image": "../images/gallery/samplr.png",
@@ -36,7 +44,7 @@
   },
   {
     "title": "Perple",
-    "copy": "High performance sports drinks",
+    "copy": "Athlete's performance sports drinks",
     "image": "../images/gallery/drink-perple-website.jpg",
     "target": "_blank",
     "rel": "noopener noreferrer"
@@ -57,7 +65,7 @@
   },
   {
     "title": "Finisterre",
-    "copy": "High end trekking and outdoor store",
+    "copy": "Trekking and outdoor store",
     "image": "../images/gallery/finisterre.jpg",
     "url": "https://finisterre.com/",
     "target": "_blank",
@@ -65,7 +73,7 @@
   },
   {
     "title": "Bluebella",
-    "copy": "Lingerie store built on Shopify Plus",
+    "copy": "Exclusive lingerie brand",
     "image": "../images/gallery/bluebella.jpg",
     "url": "https://www.bluebella.com/",
     "target": "_blank",
